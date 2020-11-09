@@ -4,45 +4,34 @@ using namespace std;
 
 vector<string> split_string(string);
 
-// Complete the jumpingOnClouds function below.
-int jumpingOnClouds(const vector<int> &c) {
-    int jumpCount = 0;
-    int current = 0;
-    while(current < c.size() - 1){
-        if(c[current+2] == 0){
-            current += 2;
-            jumpCount++;
-        } else {
-            current++;
-            jumpCount++;
-        }
-    }
+// Complete the aVeryBigSum function below.
+long aVeryBigSum(vector<long> ar) {
+    return accumulate(ar.begin(), ar.end(), 0l);
 
-    return jumpCount;
 }
 
 int main()
 {
     ofstream fout(getenv("OUTPUT_PATH"));
 
-    int n;
-    cin >> n;
+    int ar_count;
+    cin >> ar_count;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    string c_temp_temp;
-    getline(cin, c_temp_temp);
+    string ar_temp_temp;
+    getline(cin, ar_temp_temp);
 
-    vector<string> c_temp = split_string(c_temp_temp);
+    vector<string> ar_temp = split_string(ar_temp_temp);
 
-    vector<int> c(n);
+    vector<long> ar(ar_count);
 
-    for (int i = 0; i < n; i++) {
-        int c_item = stoi(c_temp[i]);
+    for (int i = 0; i < ar_count; i++) {
+        long ar_item = stol(ar_temp[i]);
 
-        c[i] = c_item;
+        ar[i] = ar_item;
     }
 
-    int result = jumpingOnClouds(c);
+    long result = aVeryBigSum(ar);
 
     fout << result << "\n";
 

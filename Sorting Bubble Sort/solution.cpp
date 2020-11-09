@@ -4,49 +4,51 @@ using namespace std;
 
 vector<string> split_string(string);
 
-// Complete the jumpingOnClouds function below.
-int jumpingOnClouds(const vector<int> &c) {
-    int jumpCount = 0;
-    int current = 0;
-    while(current < c.size() - 1){
-        if(c[current+2] == 0){
-            current += 2;
-            jumpCount++;
-        } else {
-            current++;
-            jumpCount++;
+int swap(int& x, int& y){
+    static int count = 0;
+    int temp = y;
+    y = x;
+    x = temp;
+    return ++count;
+}
+
+// Complete the countSwaps function below.
+void countSwaps(vector<int> a) {
+    int count{0};
+    for (int i = 0; i < a.size(); i++) {
+        for (int j = 0; j < a.size() - 1; j++) {
+            // Swap adjacent elements if they are in decreasing order
+            if (a[j] > a[j + 1]) {
+                count = swap(a[j], a[j + 1]);
+            }
         }
     }
-
-    return jumpCount;
+   
+   cout << "Array is sorted in " << count << " swaps.\n";
+   cout << "First Element: " << a[0] << '\n';
+   cout << "Last Element: " << *(a.end() - 1) << '\n';
 }
 
 int main()
 {
-    ofstream fout(getenv("OUTPUT_PATH"));
-
     int n;
     cin >> n;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    string c_temp_temp;
-    getline(cin, c_temp_temp);
+    string a_temp_temp;
+    getline(cin, a_temp_temp);
 
-    vector<string> c_temp = split_string(c_temp_temp);
+    vector<string> a_temp = split_string(a_temp_temp);
 
-    vector<int> c(n);
+    vector<int> a(n);
 
     for (int i = 0; i < n; i++) {
-        int c_item = stoi(c_temp[i]);
+        int a_item = stoi(a_temp[i]);
 
-        c[i] = c_item;
+        a[i] = a_item;
     }
 
-    int result = jumpingOnClouds(c);
-
-    fout << result << "\n";
-
-    fout.close();
+    countSwaps(a);
 
     return 0;
 }

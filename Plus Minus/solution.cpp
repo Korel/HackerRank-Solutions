@@ -4,49 +4,45 @@ using namespace std;
 
 vector<string> split_string(string);
 
-// Complete the jumpingOnClouds function below.
-int jumpingOnClouds(const vector<int> &c) {
-    int jumpCount = 0;
-    int current = 0;
-    while(current < c.size() - 1){
-        if(c[current+2] == 0){
-            current += 2;
-            jumpCount++;
-        } else {
-            current++;
-            jumpCount++;
+// Complete the plusMinus function below.
+void plusMinus(vector<int> arr) {
+    double positives{0}, negatives{0}, zeros{0};
+    for(auto i : arr){
+        if(i > 0){
+            positives++;
+        } else if(i < 0){
+            negatives++;
+        } else{
+            zeros++;
         }
     }
 
-    return jumpCount;
+    cout << positives / arr.size() << '\n' << negatives / arr.size() << '\n' 
+         << zeros / arr.size() << endl;
+
+
 }
 
 int main()
 {
-    ofstream fout(getenv("OUTPUT_PATH"));
-
     int n;
     cin >> n;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    string c_temp_temp;
-    getline(cin, c_temp_temp);
+    string arr_temp_temp;
+    getline(cin, arr_temp_temp);
 
-    vector<string> c_temp = split_string(c_temp_temp);
+    vector<string> arr_temp = split_string(arr_temp_temp);
 
-    vector<int> c(n);
+    vector<int> arr(n);
 
     for (int i = 0; i < n; i++) {
-        int c_item = stoi(c_temp[i]);
+        int arr_item = stoi(arr_temp[i]);
 
-        c[i] = c_item;
+        arr[i] = arr_item;
     }
 
-    int result = jumpingOnClouds(c);
-
-    fout << result << "\n";
-
-    fout.close();
+    plusMinus(arr);
 
     return 0;
 }

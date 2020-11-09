@@ -4,45 +4,49 @@ using namespace std;
 
 vector<string> split_string(string);
 
-// Complete the jumpingOnClouds function below.
-int jumpingOnClouds(const vector<int> &c) {
-    int jumpCount = 0;
-    int current = 0;
-    while(current < c.size() - 1){
-        if(c[current+2] == 0){
-            current += 2;
-            jumpCount++;
+// Complete the maximumToys function below.
+int maximumToys(vector<int> prices, int k) {
+    sort(prices.begin(), prices.end());
+
+    size_t count = 0;
+    for(auto p : prices){
+        k = k - p;
+        if(k >= 0){
+            count++;
         } else {
-            current++;
-            jumpCount++;
+            return count;
         }
     }
-
-    return jumpCount;
+    return count;
 }
 
 int main()
 {
     ofstream fout(getenv("OUTPUT_PATH"));
 
-    int n;
-    cin >> n;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    string nk_temp;
+    getline(cin, nk_temp);
 
-    string c_temp_temp;
-    getline(cin, c_temp_temp);
+    vector<string> nk = split_string(nk_temp);
 
-    vector<string> c_temp = split_string(c_temp_temp);
+    int n = stoi(nk[0]);
 
-    vector<int> c(n);
+    int k = stoi(nk[1]);
+
+    string prices_temp_temp;
+    getline(cin, prices_temp_temp);
+
+    vector<string> prices_temp = split_string(prices_temp_temp);
+
+    vector<int> prices(n);
 
     for (int i = 0; i < n; i++) {
-        int c_item = stoi(c_temp[i]);
+        int prices_item = stoi(prices_temp[i]);
 
-        c[i] = c_item;
+        prices[i] = prices_item;
     }
 
-    int result = jumpingOnClouds(c);
+    int result = maximumToys(prices, k);
 
     fout << result << "\n";
 

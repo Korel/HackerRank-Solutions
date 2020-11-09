@@ -4,49 +4,35 @@ using namespace std;
 
 vector<string> split_string(string);
 
-// Complete the jumpingOnClouds function below.
-int jumpingOnClouds(const vector<int> &c) {
-    int jumpCount = 0;
-    int current = 0;
-    while(current < c.size() - 1){
-        if(c[current+2] == 0){
-            current += 2;
-            jumpCount++;
-        } else {
-            current++;
-            jumpCount++;
-        }
+// Complete the miniMaxSum function below.
+void miniMaxSum(vector<int> arr) {
+    sort(arr.begin(), arr.end());
+    long min{0}, max{0};
+    for(int i = 0; i < 4; i++) {
+        min += arr[i];
+        max += arr[arr.size() - 1 - i];
     }
 
-    return jumpCount;
+    cout << min << ' ' << max << endl; 
+
 }
 
 int main()
 {
-    ofstream fout(getenv("OUTPUT_PATH"));
+    string arr_temp_temp;
+    getline(cin, arr_temp_temp);
 
-    int n;
-    cin >> n;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    vector<string> arr_temp = split_string(arr_temp_temp);
 
-    string c_temp_temp;
-    getline(cin, c_temp_temp);
+    vector<int> arr(5);
 
-    vector<string> c_temp = split_string(c_temp_temp);
+    for (int i = 0; i < 5; i++) {
+        int arr_item = stoi(arr_temp[i]);
 
-    vector<int> c(n);
-
-    for (int i = 0; i < n; i++) {
-        int c_item = stoi(c_temp[i]);
-
-        c[i] = c_item;
+        arr[i] = arr_item;
     }
 
-    int result = jumpingOnClouds(c);
-
-    fout << result << "\n";
-
-    fout.close();
+    miniMaxSum(arr);
 
     return 0;
 }

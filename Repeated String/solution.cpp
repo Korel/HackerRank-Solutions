@@ -3,7 +3,7 @@
 using namespace std;
 
 // Complete the repeatedString function below.
-long repeatedString(string s, long n) {
+long repeatedString(const string &s, long n) {
     if(n <= 0){
         return 0;
     }

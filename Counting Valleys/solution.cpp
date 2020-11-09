@@ -14,7 +14,7 @@ string rtrim(const string &);
  *  2. STRING path
  */
 
-int countingValleys(int steps, string path) {
+int countingValleys(int steps, const string &path) {
     int hill = 0;
     int valley = 0;
     int valleyCount = 0;
